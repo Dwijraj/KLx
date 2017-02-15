@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "159778056382",
+    "firebase_url": "https://kiitlx-964ce.firebaseio.com",
+    "project_id": "kiitlx-964ce",
+    "storage_bucket": "kiitlx-964ce.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:159778056382:android:b3d7cba582d87cd8",
+        "android_client_info": {
+          "package_name": "com.kiit.klx"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "159778056382-l830o48kc5u7hat2u2uk52hs54s8m5co.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBkDZeYJaWi25SDaYGcmo9H9UFryFqT9nw"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
