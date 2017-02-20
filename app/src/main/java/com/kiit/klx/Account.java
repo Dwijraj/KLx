@@ -1,9 +1,14 @@
 package com.kiit.klx;
 
+import android.app.FragmentManager;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -13,13 +18,36 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.GlideDrawableImageViewTarget;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class Account extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private View VIEW_OF_NAVIGATION_DRAWER_HEADER;
     private ImageView USER_IMAGE_NAVIGATION_DRAWER;
+    protected DrawerLayout drawer;
+    private TextView USER_NAME;
+    private TextView USER_EMAIL;
+    private DatabaseReference USER_DETAILS;
+    private FirebaseAuth mAuth;
+    public static User LOGGED_IN_USER_DETAIL;
+    private ImageView imageView;
+    private AlertDialog.Builder builders;
+    private LinearLayout MAIN_LAYOUT_ACCOUNT;
+    public static Context MainContext;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,16 +55,67 @@ public class Account extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+
+        MainContext=Account.this;
+        imageView=(ImageView) findViewById(R.id.imageView2);
+        MAIN_LAYOUT_ACCOUNT=(LinearLayout) findViewById(R.id.content_account);
+        mAuth=FirebaseAuth.getInstance();
+        USER_DETAILS=FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid());
+        USER_DETAILS.keepSynced(true);
+        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
+        imageView.setBackgroundColor(Color.WHITE);
+
+        GlideDrawableImageViewTarget imageViewTarget = new GlideDrawableImageViewTarget(imageView);
+        Glide.with(this).load(R.raw.shopping).into(imageViewTarget);
+
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         VIEW_OF_NAVIGATION_DRAWER_HEADER= navigationView.getHeaderView(0);
         USER_IMAGE_NAVIGATION_DRAWER=(ImageView) VIEW_OF_NAVIGATION_DRAWER_HEADER.findViewById(R.id.imageView);
+        USER_NAME=(TextView) VIEW_OF_NAVIGATION_DRAWER_HEADER.findViewById(R.id.USER_NAME_NAV_HEADER);
+        USER_EMAIL=(TextView) VIEW_OF_NAVIGATION_DRAWER_HEADER.findViewById(R.id.USER_EMAIL_NAV_HEADER);
 
+        USER_DETAILS.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                LOGGED_IN_USER_DETAIL=dataSnapshot.getValue(User.class);
+
+                try {
+
+                    USER_NAME.setText(LOGGED_IN_USER_DETAIL.DisplayName);
+                    USER_NAME.setTextColor(Color.WHITE);
+                    USER_EMAIL.setText(LOGGED_IN_USER_DETAIL.Email);
+                    USER_EMAIL.setTextColor(Color.WHITE);
+
+                    Glide.with(Account.this)
+                            .load(LOGGED_IN_USER_DETAIL.Image)
+                            .into(USER_IMAGE_NAVIGATION_DRAWER);
+
+                    USER_IMAGE_NAVIGATION_DRAWER.setImageResource(R.drawable.side_nav_bar);
+
+
+                }catch (Exception ex)
+                {
+
+                    Intent FILL_DETAILS=new Intent(Account.this,Display_Details_Change.class);
+                    finish();
+                    startActivity(FILL_DETAILS);
+                }
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError)
+            {
+                Snackbar.make(MAIN_LAYOUT_ACCOUNT,"Can't connect at the moment",Snackbar.LENGTH_INDEFINITE).show();
+
+            }
+        });
 
         navigationView.setNavigationItemSelectedListener(this);
     }
@@ -47,8 +126,32 @@ public class Account extends AppCompatActivity
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+
+            builders=new AlertDialog.Builder(this);
+            builders.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+
+                    dialog.dismiss();
+                }
+            });
+            builders.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+
+                    finish();
+                }
+            });
+            builders.setTitle("Exit");
+            builders.setMessage("Are you sure you wnt to exit app?");
+
+           // AlertDialog dialogs=builders.create();
+            final AlertDialog dialogs=builders.create();
+            dialogs.show();
+           // super.onBackPressed();
         }
+
+
     }
 
     @Override
@@ -67,6 +170,12 @@ public class Account extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+
+            mAuth.signOut();
+            Intent NEW_SESSION=new Intent(Account.this,HomeActivity.class);
+            finish();
+            startActivity(NEW_SESSION);
+
             return true;
         }
 
@@ -79,13 +188,37 @@ public class Account extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
+        android.support.v4.app.FragmentManager fragmentManager= getSupportFragmentManager();
+
+        if (id == R.id.nav_buy) {
+
+
             // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        } else if (id == R.id.nav_sell) {
 
-        } else if (id == R.id.nav_slideshow) {
+            fragmentManager.beginTransaction().replace(R.id.content_frame,new Sell()).commit();
 
-        } else if (id == R.id.nav_manage) {
+        } else if (id == R.id.nav_member) {
+
+
+
+
+
+
+        } else if (id == R.id.nav_profile) {
+
+           // fragmentManager.beginTransaction().replace(R.id.content_frame, new userprofile()).commit();
+
+
+            if(LOGGED_IN_USER_DETAIL!=null) {
+                fragmentManager.beginTransaction().replace(R.id.content_frame, new userprofile()).commit();
+            }
+            else
+            {
+                Snackbar.make(MAIN_LAYOUT_ACCOUNT,"Can't connect at the moment",Snackbar.LENGTH_INDEFINITE).show();
+            }
+
+
 
         } else if (id == R.id.nav_share) {
 
@@ -97,4 +230,5 @@ public class Account extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
 }

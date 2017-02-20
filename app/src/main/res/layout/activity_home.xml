@@ -4,6 +4,7 @@
     android:id="@+id/activity_home"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:weightSum="100"
     android:background="@color/colorPrimary"
     android:orientation="vertical"
     android:gravity="center"
@@ -14,9 +15,11 @@
         android:layout_marginTop="30dp"
         android:orientation="vertical"
         android:layout_width="match_parent"
+        android:layout_weight="50"
         android:layout_height="wrap_content">
 
         <ImageView
+            android:layout_marginTop="30dp"
             android:layout_width="match_parent"
             android:src="@drawable/klx"
             android:layout_height="wrap_content" />
@@ -76,6 +79,32 @@
                 android:textColorHint="#ffff"
                 android:hint="Password"/>
         </android.support.design.widget.TextInputLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_margin="20dp"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:textSize="@dimen/TextSize"
+                android:id="@+id/RESETMAIL"
+                android:textColor="@color/Textcolor"
+                android:text="Forgot password ?"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:layout_marginLeft="10dp"
+                android:layout_width="wrap_content"
+                android:textSize="@dimen/TextSize"
+                android:id="@+id/GUEST_LOGIN"
+                android:textColor="@color/Textcolor"
+                android:text="Login as guest"
+                android:layout_height="wrap_content" />
+
+
+        </LinearLayout>
 
 
         <Button
