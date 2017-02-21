@@ -20,6 +20,7 @@
         android:layout_width="wrap_content"
         android:background="@drawable/side_nav_bar"
         android:layout_height="match_parent"
+        app:itemIconTint="#fff"
         android:layout_gravity="start"
         app:itemTextColor="#ffff"
         android:fitsSystemWindows="true"

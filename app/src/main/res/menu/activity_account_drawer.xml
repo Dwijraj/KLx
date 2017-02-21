@@ -6,30 +6,34 @@
             android:id="@+id/nav_sell"
             android:icon="@mipmap/ic_add_shopping_cart_white_24dp"
             android:title="Sell" />
-        <item
-            android:id="@+id/nav_buy"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="Buy" />
-        <item
-            android:id="@+id/nav_member"
-            android:icon="@mipmap/ic_supervisor_account_white_24dp"
-            android:title="Members" />
+
         <item
             android:id="@+id/nav_profile"
             android:icon="@mipmap/ic_account_circle_white_24dp"
             android:title="My Profile" />
     </group>
 
-    <item android:title="Communicate">
+    <item android:title="Buy"
+        android:id="@+id/Buy"
+            >
         <menu>
             <item
-                android:id="@+id/nav_share"
-                android:icon="@drawable/ic_menu_share"
-                android:title="Share" />
+                android:id="@+id/nav_mobile"
+                android:icon="@mipmap/ic_smartphone_white_24dp"
+                android:title="Mobile" />
             <item
-                android:id="@+id/nav_send"
-                android:icon="@drawable/ic_menu_send"
-                android:title="Send" />
+                android:id="@+id/nav_electronics"
+                android:icon="@mipmap/ic_computer_white_24dp"
+                android:title="Electronics"/>
+            <item
+                android:id="@+id/nav_books"
+                android:icon="@mipmap/ic_book_white_24dp"
+                android:title="Books" />
+
+            <item
+                android:id="@+id/nav_vehicle"
+                android:icon="@mipmap/ic_airport_shuttle_white_24dp"
+                android:title="Vehicle" />
         </menu>
     </item>
 

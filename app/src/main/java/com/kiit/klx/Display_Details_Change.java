@@ -1,6 +1,5 @@
 package com.kiit.klx;
 
-import android.*;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
@@ -16,7 +15,6 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -26,7 +24,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -192,8 +189,6 @@ public class Display_Details_Change extends Activity {
             @Override
             public void onClick(View v) {
 
-             /*   Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-                startActivityForResult(cameraIntent, PROFILE_PHOTO); */
 
              AlertDialog.Builder builder=   new AlertDialog.Builder(Display_Details_Change.this)
                         .setTitle("Upload picture")

@@ -9,6 +9,8 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
+import android.text.SpannableString;
+import android.text.style.TextAppearanceSpan;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -33,11 +35,13 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class Account extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private View VIEW_OF_NAVIGATION_DRAWER_HEADER;
-    private ImageView USER_IMAGE_NAVIGATION_DRAWER;
+    private CircleImageView USER_IMAGE_NAVIGATION_DRAWER;
     protected DrawerLayout drawer;
     private TextView USER_NAME;
     private TextView USER_EMAIL;
@@ -47,6 +51,7 @@ public class Account extends AppCompatActivity
     private ImageView imageView;
     private AlertDialog.Builder builders;
     private LinearLayout MAIN_LAYOUT_ACCOUNT;
+    public static String CATEGORY;
     public static Context MainContext;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,8 +79,16 @@ public class Account extends AppCompatActivity
         Glide.with(this).load(R.raw.shopping).into(imageViewTarget);
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        Menu menu = navigationView.getMenu();
+        MenuItem tools= menu.findItem(R.id.Buy);
+        SpannableString s = new SpannableString(tools.getTitle());
+        s.setSpan(new TextAppearanceSpan(this, R.style.TextAppearance44), 0, s.length(), 0);
+        tools.setTitle(s);
+
+
+
         VIEW_OF_NAVIGATION_DRAWER_HEADER= navigationView.getHeaderView(0);
-        USER_IMAGE_NAVIGATION_DRAWER=(ImageView) VIEW_OF_NAVIGATION_DRAWER_HEADER.findViewById(R.id.imageView);
+        USER_IMAGE_NAVIGATION_DRAWER=(CircleImageView) VIEW_OF_NAVIGATION_DRAWER_HEADER.findViewById(R.id.imageView);
         USER_NAME=(TextView) VIEW_OF_NAVIGATION_DRAWER_HEADER.findViewById(R.id.USER_NAME_NAV_HEADER);
         USER_EMAIL=(TextView) VIEW_OF_NAVIGATION_DRAWER_HEADER.findViewById(R.id.USER_EMAIL_NAV_HEADER);
 
@@ -96,8 +109,7 @@ public class Account extends AppCompatActivity
                             .load(LOGGED_IN_USER_DETAIL.Image)
                             .into(USER_IMAGE_NAVIGATION_DRAWER);
 
-                    USER_IMAGE_NAVIGATION_DRAWER.setImageResource(R.drawable.side_nav_bar);
-
+                  
 
                 }catch (Exception ex)
                 {
@@ -140,6 +152,11 @@ public class Account extends AppCompatActivity
                 public void onClick(DialogInterface dialog, int which) {
 
                     finish();
+
+                    if(mAuth.getCurrentUser().getEmail().equals(Constants.GUEST_EMAIL))
+                    {
+                        mAuth.signOut();
+                    }
                 }
             });
             builders.setTitle("Exit");
@@ -190,27 +207,30 @@ public class Account extends AppCompatActivity
 
         android.support.v4.app.FragmentManager fragmentManager= getSupportFragmentManager();
 
-        if (id == R.id.nav_buy) {
+       if (id == R.id.nav_sell) {
 
+           //fragmentManager.beginTransaction().replace(R.id.content_frame, new Sell()).commit();
 
-            // Handle the camera action
-        } else if (id == R.id.nav_sell) {
+           if (LOGGED_IN_USER_DETAIL != null) {
+               if (!LOGGED_IN_USER_DETAIL.Email.equals(Constants.GUEST_EMAIL)) {
+                   fragmentManager.beginTransaction().replace(R.id.content_frame, new Sell()).commit();
 
-            fragmentManager.beginTransaction().replace(R.id.content_frame,new Sell()).commit();
+               }
+               else
+               {
+                   Snackbar.make(MAIN_LAYOUT_ACCOUNT,"Guests aren't authorized to sell and buy Please Logout  to sell",Snackbar.LENGTH_INDEFINITE).show();
+               }
+           } else {
+               Snackbar.make(MAIN_LAYOUT_ACCOUNT, "Can't connect at the moment", Snackbar.LENGTH_INDEFINITE).show();
 
-        } else if (id == R.id.nav_member) {
-
-
-
-
-
-
-        } else if (id == R.id.nav_profile) {
+           }
+       }
+        else if (id == R.id.nav_profile) {
 
            // fragmentManager.beginTransaction().replace(R.id.content_frame, new userprofile()).commit();
 
 
-            if(LOGGED_IN_USER_DETAIL!=null) {
+            if(LOGGED_IN_USER_DETAIL.Email!=Constants.GUEST_EMAIL) {
                 fragmentManager.beginTransaction().replace(R.id.content_frame, new userprofile()).commit();
             }
             else
@@ -220,11 +240,31 @@ public class Account extends AppCompatActivity
 
 
 
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
         }
+       else
+       {
+            if (id == R.id.nav_mobile) {
+
+                CATEGORY=Constants.CATEGORY_MOBILE;
+
+            } else if (id==R.id.nav_electronics)
+            {
+                 CATEGORY=Constants.CATEGORY_ELECTRONICS;
+            }
+            else if (id == R.id.nav_books) {
+
+                CATEGORY=Constants.CATEGORY_BOOK;
+
+            } else if (id == R.id.nav_vehicle) {
+
+
+                 CATEGORY=Constants.CATEGORY_VEHICLE;
+            }
+
+
+           fragmentManager.beginTransaction().replace(R.id.content_frame, new  Category_Searched()).commit();
+       }
+
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

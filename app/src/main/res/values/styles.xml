@@ -19,4 +19,9 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+    <style name="TextAppearance44">
+        <item name="android:textColor">#FFFF</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+
 </resources>

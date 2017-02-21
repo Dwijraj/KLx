@@ -21,6 +21,8 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class userprofile extends Fragment  {
 
 
@@ -31,7 +33,7 @@ public class userprofile extends Fragment  {
     private TextView Uploads;
     private TextView Bought;
     private TextView Reset_Email;
-    private ImageView Profile_pic;
+    private CircleImageView Profile_pic;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -45,7 +47,7 @@ public class userprofile extends Fragment  {
         Uploads=(TextView) view.findViewById(R.id.USERPROFILE_UPLOADS_ID);
         Bought=(TextView) view.findViewById(R.id.USERPROFILE_BOUGHT_ID);
         Reset_Email=(TextView) view.findViewById(R.id.USERPROFILE_RESET_PASSWORD_ID);
-        Profile_pic=(ImageView) view.findViewById(R.id.USERPROFILE_IMAGE_VIEW_ID);
+        Profile_pic=(CircleImageView) view.findViewById(R.id.USERPROFILE_IMAGE_VIEW_ID);
 
         Name.setText(Account.LOGGED_IN_USER_DETAIL.DisplayName);
         Email.setText(Account.LOGGED_IN_USER_DETAIL.Email);
