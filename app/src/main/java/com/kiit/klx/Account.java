@@ -11,6 +11,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.text.SpannableString;
 import android.text.style.TextAppearanceSpan;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -61,6 +62,8 @@ public class Account extends AppCompatActivity
         setSupportActionBar(toolbar);
 
 
+        LOGGED_IN_USER_DETAIL=new User();
+        LOGGED_IN_USER_DETAIL.Email=Constants.NOT_LOGGEDIN;
         MainContext=Account.this;
         imageView=(ImageView) findViewById(R.id.imageView2);
         MAIN_LAYOUT_ACCOUNT=(LinearLayout) findViewById(R.id.content_account);
@@ -109,7 +112,7 @@ public class Account extends AppCompatActivity
                             .load(LOGGED_IN_USER_DETAIL.Image)
                             .into(USER_IMAGE_NAVIGATION_DRAWER);
 
-                  
+
 
                 }catch (Exception ex)
                 {
@@ -124,7 +127,7 @@ public class Account extends AppCompatActivity
             @Override
             public void onCancelled(DatabaseError databaseError)
             {
-                Snackbar.make(MAIN_LAYOUT_ACCOUNT,"Can't connect at the moment",Snackbar.LENGTH_INDEFINITE).show();
+                Snackbar.make(MAIN_LAYOUT_ACCOUNT,Constants.CANT_CONNECT,Snackbar.LENGTH_INDEFINITE).show();
 
             }
         });
@@ -151,16 +154,17 @@ public class Account extends AppCompatActivity
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
 
-                    finish();
-
                     if(mAuth.getCurrentUser().getEmail().equals(Constants.GUEST_EMAIL))
                     {
                         mAuth.signOut();
                     }
+                    finish();
+
+
                 }
             });
             builders.setTitle("Exit");
-            builders.setMessage("Are you sure you wnt to exit app?");
+            builders.setMessage("Are you sure you want to exit app?");
 
            // AlertDialog dialogs=builders.create();
             final AlertDialog dialogs=builders.create();
@@ -211,17 +215,19 @@ public class Account extends AppCompatActivity
 
            //fragmentManager.beginTransaction().replace(R.id.content_frame, new Sell()).commit();
 
-           if (LOGGED_IN_USER_DETAIL != null) {
+           if(!(LOGGED_IN_USER_DETAIL.Email.equals(Constants.NOT_LOGGEDIN))) {
                if (!LOGGED_IN_USER_DETAIL.Email.equals(Constants.GUEST_EMAIL)) {
                    fragmentManager.beginTransaction().replace(R.id.content_frame, new Sell()).commit();
+
+
 
                }
                else
                {
-                   Snackbar.make(MAIN_LAYOUT_ACCOUNT,"Guests aren't authorized to sell and buy Please Logout  to sell",Snackbar.LENGTH_INDEFINITE).show();
+                   Snackbar.make(MAIN_LAYOUT_ACCOUNT,Constants.GUEST_ON_TRY_SELL,Snackbar.LENGTH_INDEFINITE).show();
                }
            } else {
-               Snackbar.make(MAIN_LAYOUT_ACCOUNT, "Can't connect at the moment", Snackbar.LENGTH_INDEFINITE).show();
+               Snackbar.make(MAIN_LAYOUT_ACCOUNT, Constants.CANT_CONNECT, Snackbar.LENGTH_INDEFINITE).show();
 
            }
        }
@@ -230,7 +236,7 @@ public class Account extends AppCompatActivity
            // fragmentManager.beginTransaction().replace(R.id.content_frame, new userprofile()).commit();
 
 
-            if(LOGGED_IN_USER_DETAIL.Email!=Constants.GUEST_EMAIL) {
+            if(!(LOGGED_IN_USER_DETAIL.Email.equals(Constants.NOT_LOGGEDIN))) {
                 fragmentManager.beginTransaction().replace(R.id.content_frame, new userprofile()).commit();
             }
             else

@@ -12,4 +12,8 @@ public class Constants {
     public static String CATEGORY_BOOK="BOOKS";
     public static String CATEGORY_VEHICLE="VEHICLE";
     public static String CATEGORY_MOBILE="MOBILES";
+    public static String NOT_LOGGEDIN="NOT_CONNECTED";
+    public static String CANT_CONNECT="Can't connect at the moment please try latter";
+    public static String GUEST_ON_TRY_SELL="Guests aren't authorized to sell and buy Please Logout and create an account  to sell";
+
 }

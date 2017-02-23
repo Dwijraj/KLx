@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#340dc1</color>
+    <color name="ThemeBarStart">#14d207</color>
+    <color name="ThemeBarCenter">#e160a9</color>
+    <color name="ThemeBarEnd">#f5e7ef</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#020001</color>
     <color name="User_background">#be9c36</color>

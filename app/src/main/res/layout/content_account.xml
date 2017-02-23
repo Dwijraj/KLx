@@ -37,7 +37,7 @@
                 android:textColor="#000"
                 android:textSize="19sp"
                 android:layout_width="match_parent"
-                android:text="KLX: An  online second hand market "
+                android:text="KLx: An  online second hand market "
                 android:layout_height="0dp" />
 
         </LinearLayout>
