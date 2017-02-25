@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:weightSum="100"
     android:orientation="vertical"
-    tools:context="com.kiit.klx.userprofile">
+    tools:context="com.kiit.klx.Fragments.userprofile">
 
     <LinearLayout
         android:layout_width="match_parent"

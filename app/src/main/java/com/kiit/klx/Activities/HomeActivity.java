@@ -1,4 +1,4 @@
-package com.kiit.klx;
+package com.kiit.klx.Activities;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -22,6 +22,9 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.kiit.klx.Constants.Constants;
+import com.kiit.klx.Fragments.Display_Details_Change;
+import com.kiit.klx.R;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -61,7 +64,7 @@ public class HomeActivity extends AppCompatActivity {
 
             if(mAuth.getCurrentUser()!=null)
         {
-            Intent Account=new Intent(HomeActivity.this, com.kiit.klx.Account.class);
+            Intent Account=new Intent(HomeActivity.this, com.kiit.klx.Activities.Account.class);
            // Intent Account=new Intent(HomeActivity.this, Display_Details_Change.class);
             finish();
             startActivity(Account);
@@ -208,7 +211,7 @@ public class HomeActivity extends AppCompatActivity {
                                     @Override
                                     public void onSuccess(AuthResult authResult) {
 
-                                        Intent Account=new Intent(HomeActivity.this, com.kiit.klx.Account.class);
+                                        Intent Account=new Intent(HomeActivity.this, com.kiit.klx.Activities.Account.class);
                                         finish();
                                         startActivity(Account);
 
@@ -233,7 +236,7 @@ public class HomeActivity extends AppCompatActivity {
                             @Override
                             public void onSuccess(AuthResult authResult) {
 
-                                Intent Account=new Intent(HomeActivity.this, com.kiit.klx.Account.class);
+                                Intent Account=new Intent(HomeActivity.this, com.kiit.klx.Activities.Account.class);
                                 finish();
                                 startActivity(Account);
 

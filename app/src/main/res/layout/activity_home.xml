@@ -9,7 +9,7 @@
     android:orientation="vertical"
     android:gravity="center"
     android:layout_centerHorizontal="true"
-    tools:context="com.kiit.klx.HomeActivity">
+    tools:context="com.kiit.klx.Activities.HomeActivity">
 
     <ScrollView
         android:layout_width="match_parent"

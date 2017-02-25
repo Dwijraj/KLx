@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/category_searched"
-    tools:context="com.kiit.klx.Category_Searched">
+    tools:context="com.kiit.klx.Fragments.Category_Searched">
 
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"

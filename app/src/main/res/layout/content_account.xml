@@ -9,7 +9,7 @@
     android:weightSum="100"
     android:background="#ffff"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.kiit.klx.Account"
+    tools:context="com.kiit.klx.Activities.Account"
     tools:showIn="@layout/app_bar_account">
 
     <FrameLayout

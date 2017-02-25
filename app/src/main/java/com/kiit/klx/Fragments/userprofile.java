@@ -1,14 +1,10 @@
-package com.kiit.klx;
+package com.kiit.klx.Fragments;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.DialogInterface;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -27,6 +23,9 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.kiit.klx.Activities.Account;
+import com.kiit.klx.Constants.Constants;
+import com.kiit.klx.R;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 

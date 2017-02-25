@@ -1,4 +1,4 @@
-package com.kiit.klx;
+package com.kiit.klx.Model;
 
 /**
  * Created by 1405214 on 19-02-2017.

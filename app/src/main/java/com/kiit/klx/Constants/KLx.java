@@ -1,4 +1,4 @@
-package com.kiit.klx;
+package com.kiit.klx.Constants;
 
 import android.app.Activity;
 import android.app.Application;

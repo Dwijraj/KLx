@@ -1,17 +1,14 @@
-package com.kiit.klx;
+package com.kiit.klx.Activities;
 
-import android.app.FragmentManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.text.SpannableString;
 import android.text.style.TextAppearanceSpan;
-import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -21,13 +18,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.target.GlideDrawableImageViewTarget;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -35,6 +31,13 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.kiit.klx.Fragments.Category_Searched;
+import com.kiit.klx.Constants.Constants;
+import com.kiit.klx.Fragments.Display_Details_Change;
+import com.kiit.klx.Model.User;
+import com.kiit.klx.R;
+import com.kiit.klx.Fragments.Sell;
+import com.kiit.klx.Fragments.userprofile;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -51,7 +54,7 @@ public class Account extends AppCompatActivity
     public static User LOGGED_IN_USER_DETAIL;
     private ImageView imageView;
     private AlertDialog.Builder builders;
-    private LinearLayout MAIN_LAYOUT_ACCOUNT;
+    public static LinearLayout MAIN_LAYOUT_ACCOUNT;
     public static String CATEGORY;
     public static Context MainContext;
     public static  android.support.v4.app.FragmentManager fragmentManager;
@@ -65,7 +68,7 @@ public class Account extends AppCompatActivity
 
         fragmentManager= getSupportFragmentManager();
         LOGGED_IN_USER_DETAIL=new User();
-        LOGGED_IN_USER_DETAIL.Email=Constants.NOT_LOGGEDIN;
+        LOGGED_IN_USER_DETAIL.Email= Constants.NOT_LOGGEDIN;
         MainContext=Account.this;
         imageView=(ImageView) findViewById(R.id.imageView2);
         MAIN_LAYOUT_ACCOUNT=(LinearLayout) findViewById(R.id.content_account);
@@ -112,6 +115,7 @@ public class Account extends AppCompatActivity
 
                     Glide.with(Account.this)
                             .load(LOGGED_IN_USER_DETAIL.Image)
+                            .diskCacheStrategy( DiskCacheStrategy.ALL )
                             .into(USER_IMAGE_NAVIGATION_DRAWER);
 
 
@@ -270,7 +274,7 @@ public class Account extends AppCompatActivity
             }
 
 
-           fragmentManager.beginTransaction().replace(R.id.content_frame, new  Category_Searched()).commit();
+           fragmentManager.beginTransaction().replace(R.id.content_frame, new Category_Searched()).commit();
        }
 
 

@@ -1,4 +1,4 @@
-package com.kiit.klx;
+package com.kiit.klx.Fragments;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -32,12 +32,12 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.kiit.klx.R;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.jar.*;
 
 public class Display_Details_Change extends Activity {
 
@@ -122,7 +122,7 @@ public class Display_Details_Change extends Activity {
                                         public void onSuccess(Void aVoid) {
                                             progressDialog.dismiss();
                                             Toast.makeText(getApplicationContext(),"Get down to buissness",Toast.LENGTH_SHORT).show();
-                                            Intent Account=new Intent(Display_Details_Change.this, com.kiit.klx.Account.class);
+                                            Intent Account=new Intent(Display_Details_Change.this, com.kiit.klx.Activities.Account.class);
                                             finish();
                                             startActivity(Account);
                                         }
@@ -156,7 +156,7 @@ public class Display_Details_Change extends Activity {
                                         public void onSuccess(Void aVoid) {
                                             progressDialog.dismiss();
                                             Toast.makeText(getApplicationContext(),"Get down to buissness",Toast.LENGTH_SHORT).show();
-                                            Intent Account=new Intent(Display_Details_Change.this, com.kiit.klx.Account.class);
+                                            Intent Account=new Intent(Display_Details_Change.this, com.kiit.klx.Activities.Account.class);
                                             finish();
                                             startActivity(Account);
                                         }

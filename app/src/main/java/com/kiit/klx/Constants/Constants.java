@@ -1,4 +1,4 @@
-package com.kiit.klx;
+package com.kiit.klx.Constants;
 
 /**
  * Created by 1405214 on 20-02-2017.
@@ -15,5 +15,6 @@ public class Constants {
     public static String NOT_LOGGEDIN="NOT_CONNECTED";
     public static String CANT_CONNECT="Can't connect at the moment please try latter";
     public static String GUEST_ON_TRY_SELL="Guests aren't authorized to sell and buy Please Logout and create an account  to sell";
+    public static String PRODUCT_COULDNOT_BE_UPLOAD="Sorry your product could not me uploaded";
     public static String[] CATEGORIES=new String[]{CATEGORY_ELECTRONICS,CATEGORY_BOOK,CATEGORY_VEHICLE,CATEGORY_MOBILE};
 }
