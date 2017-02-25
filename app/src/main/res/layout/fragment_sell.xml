@@ -1,13 +1,264 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@drawable/sell_bgcolor"
+    android:background="#ffff"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+
     tools:context="com.kiit.klx.Sell">
 
-    <!-- TODO: Update blank fragment layout -->
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_weight="100"
+        android:id="@+id/CARDVIEW_CONTAINER_ID"
+        android:layout_height="0dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:weightSum="100"
+            android:orientation="vertical"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_weight="50"
+                android:orientation="vertical"
+                android:layout_marginBottom="2dp"
+                android:layout_height="0dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_weight="50"
+                    android:weightSum="100"
+                    android:orientation="horizontal"
+                    android:layout_height="0dp">
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_weight="10"
+                        android:layout_height="match_parent"/>
 
 
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_weight="40"
+                        android:scaleType="fitXY"
+                        android:background="@mipmap/ic_photo_camera_black_24dp"
+                        android:id="@+id/IMAGE_1_SELL"
+                        android:layout_height="140dp" />
+
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="match_parent"/>
+
+
+
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_weight="40"
+                        android:scaleType="fitXY"
+                        android:background="@mipmap/ic_photo_camera_black_24dp"
+                        android:id="@+id/IMAGE_2_SELL"
+                        android:layout_height="140dp" />
+
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_weight="5"
+                        android:layout_height="match_parent"/>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+
+                    android:layout_marginTop="2dp"
+                    android:layout_width="match_parent"
+                    android:layout_weight="50"
+                    android:weightSum="100"
+                    android:orientation="horizontal"
+                    android:layout_height="0dp">
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_weight="10"
+                        android:layout_height="match_parent"/>
+
+
+                    <ImageView
+
+                        android:scaleType="fitXY"
+                        android:layout_width="0dp"
+                        android:layout_weight="40"
+                        android:background="@mipmap/ic_photo_camera_black_24dp"
+                        android:id="@+id/IMAGE_3_SELL"
+                        android:layout_height="140dp" />
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="match_parent"/>
+
+
+                    <ImageView
+
+
+                        android:scaleType="fitXY"
+                        android:background="@mipmap/ic_photo_camera_black_24dp"
+                        android:layout_width="0dp"
+                        android:layout_weight="40"
+                        android:id="@+id/IMAGE_4_SELL"
+                        android:layout_height="140dp" />
+
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_weight="5"
+                        android:layout_height="match_parent"/>
+
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_weight="10"
+                android:weightSum="100"
+                android:layout_height="0dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="50"
+                    android:gravity="center"
+                    android:text="CATEGORY:"
+                    android:layout_height="match_parent" />
+
+                <Spinner
+                    android:layout_width="0dp"
+                    android:layout_weight="50"
+                    android:id="@+id/SPIINER_CATEGORY"
+                    android:layout_height="match_parent">
+
+                </Spinner>
+
+
+            </LinearLayout>
+
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_weight="40"
+                android:weightSum="100"
+                android:layout_height="0dp">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="50"
+                    android:orientation="vertical"
+                    android:weightSum="80"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:gravity="center"
+                        android:text="PRICE :"
+                        android:textSize="@dimen/TextSizeProductShow"
+                        android:layout_weight="20"
+                        android:layout_height="0dp" />
+
+                    <TextView
+                        android:textSize="@dimen/TextSizeProductShow"
+                        android:layout_weight="20"
+                        android:layout_width="match_parent"
+                        android:gravity="center"
+                        android:text="PRODUCT NAME :"
+                        android:layout_height="0dp" />
+
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_weight="10"
+                        android:layout_height="0dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_centerHorizontal="true"
+                            android:text="DESCRIPTION :"
+                            android:textSize="@dimen/TextSizeProductShow"
+                            android:layout_height="wrap_content" />
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_weight="30"
+                        android:gravity="center"
+                        android:layout_height="0dp">
+
+                       <Button
+                           android:layout_width="wrap_content"
+                           android:text="SELL"
+                           android:id="@+id/SELL_BUTTON"
+                           android:textColor="#000"
+                           android:layout_height="wrap_content" />
+
+
+                    </RelativeLayout>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="50"
+                    android:orientation="vertical"
+                    android:weightSum="80"
+                    android:layout_height="match_parent">
+
+
+
+                   <EditText
+                       android:id="@+id/PRODUCT_PRICE_ID_EDIT_TEXT"
+                       android:layout_width="match_parent"
+                       android:gravity="center"
+                       android:hint="Price"
+                       android:layout_weight="20"
+                       android:layout_height="0dp" />
+
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:gravity="center"
+                        android:hint="Product name"
+                        android:id="@+id/PRODUCT_NAME_ID_EDIT_TEXT"
+                        android:layout_weight="20"
+                        android:layout_height="0dp" />
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:gravity="start"
+                        android:hint="Descriptiion"
+                        android:id="@+id/PRODUCT_DESCRIPTION_ID_EDIT_TEXT"
+                        android:layout_weight="40"
+                        android:layout_height="0dp" />
+
+
+
+
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+
+    </android.support.v7.widget.CardView>
 
 
 </LinearLayout>

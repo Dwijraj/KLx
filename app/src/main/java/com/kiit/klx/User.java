@@ -11,16 +11,18 @@ public class User {
     public String Uploads;
     public String Uid;
     public String Bought;
+    public String Mobile;
 
-    public User(String displayName, String image, String email, String uploads, String uid, String bought) {
+    public User() {
+    }
+
+    public User(String displayName, String image, String email, String uploads, String uid, String bought, String mobile) {
         DisplayName = displayName;
         Image = image;
         Email = email;
         Uploads = uploads;
         Uid = uid;
         Bought = bought;
-    }
-
-    public User() {
+        Mobile = mobile;
     }
 }

@@ -62,6 +62,19 @@
                     android:ems="10"
                     android:hint="Display Name"/>
 
+            <EditText
+                android:layout_marginTop="13dp"
+                android:background="#ffff"
+                android:id="@+id/MOBILE_NUMBER"
+                android:textColor="#0026ff"
+                android:gravity="center"
+                android:textColorHint="#001aff"
+                android:inputType="number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Mobile Number"/>
+
         </LinearLayout>
 
     </LinearLayout>

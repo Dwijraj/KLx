@@ -33,6 +33,8 @@ public class userprofile extends Fragment  {
     private TextView Uploads;
     private TextView Bought;
     private TextView Reset_Email;
+    private TextView Mobile;
+    private ImageView EDIT;
     private CircleImageView Profile_pic;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -48,11 +50,14 @@ public class userprofile extends Fragment  {
         Bought=(TextView) view.findViewById(R.id.USERPROFILE_BOUGHT_ID);
         Reset_Email=(TextView) view.findViewById(R.id.USERPROFILE_RESET_PASSWORD_ID);
         Profile_pic=(CircleImageView) view.findViewById(R.id.USERPROFILE_IMAGE_VIEW_ID);
+        Mobile=(TextView) view.findViewById(R.id.MOBILE_NUMBER_ID);
+        EDIT=(ImageView) view.findViewById(R.id.EDIT_INFO);
 
         Name.setText(Account.LOGGED_IN_USER_DETAIL.DisplayName);
         Email.setText(Account.LOGGED_IN_USER_DETAIL.Email);
         Uploads.setText(Account.LOGGED_IN_USER_DETAIL.Uploads);
         Bought.setText(Account.LOGGED_IN_USER_DETAIL.Bought);
+        Mobile.setText(Account.LOGGED_IN_USER_DETAIL.Mobile);
 
 
         Glide.with(userprofile.this)

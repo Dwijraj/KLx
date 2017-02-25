@@ -43,6 +43,7 @@ public class Display_Details_Change extends Activity {
 
     private ImageView PROFILE_PIC;
     private EditText DISPLAY_NAME;
+    private EditText PHONE_NUMBER;
     private Button LOOKS_GOOD;
     private final int GALLERY_OPEN=90;
     private final Integer CAMERA = 0x4;
@@ -74,6 +75,7 @@ public class Display_Details_Change extends Activity {
         progressDialog.setCanceledOnTouchOutside(false);
         PROFILE_PIC=(ImageView) findViewById(R.id.PROFILE_PICTURE);
         DISPLAY_NAME=(EditText) findViewById(R.id.DISPLAY_NAMES);
+        PHONE_NUMBER=(EditText) findViewById(R.id.MOBILE_NUMBER);
         LOOKS_GOOD=(Button) findViewById(R.id.TO_HOME_PAGE);
         Users= FirebaseDatabase.getInstance().getReference();
         storageReference= FirebaseStorage.getInstance().getReference();//.child("Users");
@@ -87,7 +89,8 @@ public class Display_Details_Change extends Activity {
                 final StorageReference newusertorage=storageReference.child("Users");
                 final DatabaseReference NewUser=Users.child("Users").child(mauth.getCurrentUser().getUid());
                 DisplayName=DISPLAY_NAME.getText().toString().trim();
-                if(!(((byteArray!=null)||scaniduri!=null)&& !TextUtils.isEmpty(DisplayName)))
+                if(!(((byteArray!=null)||scaniduri!=null)&& !TextUtils.isEmpty(DisplayName)&& !TextUtils.isEmpty(PHONE_NUMBER.getText().toString().trim())
+                && TextUtils.isDigitsOnly(PHONE_NUMBER.getText().toString().trim())))
                 {
                     Toast.makeText(getApplicationContext(),"Fill details and select a picture",Toast.LENGTH_SHORT).show();
 
@@ -112,6 +115,7 @@ public class Display_Details_Change extends Activity {
                                     NewUser.child("Image").setValue(taskSnapshot.getDownloadUrl().toString());
                                     NewUser.child("Email").setValue(mauth.getCurrentUser().getEmail());
                                     NewUser.child("Uploads").setValue("0");
+                                    NewUser.child("Mobile").setValue(PHONE_NUMBER.getText().toString().trim());
                                     NewUser.child("Uid").setValue(mauth.getCurrentUser().getUid());
                                     NewUser.child("Bought").setValue("0").addOnSuccessListener(new OnSuccessListener<Void>() {
                                         @Override
