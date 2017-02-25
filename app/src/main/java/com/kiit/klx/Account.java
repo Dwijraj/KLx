@@ -54,6 +54,7 @@ public class Account extends AppCompatActivity
     private LinearLayout MAIN_LAYOUT_ACCOUNT;
     public static String CATEGORY;
     public static Context MainContext;
+    public static  android.support.v4.app.FragmentManager fragmentManager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,6 +63,7 @@ public class Account extends AppCompatActivity
         setSupportActionBar(toolbar);
 
 
+        fragmentManager= getSupportFragmentManager();
         LOGGED_IN_USER_DETAIL=new User();
         LOGGED_IN_USER_DETAIL.Email=Constants.NOT_LOGGEDIN;
         MainContext=Account.this;
@@ -209,7 +211,7 @@ public class Account extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        android.support.v4.app.FragmentManager fragmentManager= getSupportFragmentManager();
+
 
        if (id == R.id.nav_sell) {
 

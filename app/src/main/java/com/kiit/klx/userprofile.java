@@ -1,6 +1,7 @@
 package com.kiit.klx;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -9,9 +10,13 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,6 +25,8 @@ import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -36,6 +43,8 @@ public class userprofile extends Fragment  {
     private TextView Mobile;
     private ImageView EDIT;
     private CircleImageView Profile_pic;
+    private DatabaseReference databaseReference;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -53,11 +62,54 @@ public class userprofile extends Fragment  {
         Mobile=(TextView) view.findViewById(R.id.MOBILE_NUMBER_ID);
         EDIT=(ImageView) view.findViewById(R.id.EDIT_INFO);
 
+
         Name.setText(Account.LOGGED_IN_USER_DETAIL.DisplayName);
         Email.setText(Account.LOGGED_IN_USER_DETAIL.Email);
         Uploads.setText(Account.LOGGED_IN_USER_DETAIL.Uploads);
         Bought.setText(Account.LOGGED_IN_USER_DETAIL.Bought);
         Mobile.setText(Account.LOGGED_IN_USER_DETAIL.Mobile);
+
+
+        databaseReference= FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid()).child("Mobile");
+        EDIT.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                final Dialog dialog=new Dialog(Account.MainContext);
+                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                dialog.setContentView(R.layout.change_details);
+
+
+
+                final EditText CHANGE=(EditText) dialog.findViewById(R.id.CHANGE_EDIT_TEXT);
+                Button   SUBMIT=(Button)   dialog.findViewById(R.id.CONFIRM_CHANGES);
+
+                SUBMIT.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        if(!TextUtils.isEmpty(CHANGE.getText().toString().trim())&&TextUtils.isDigitsOnly(CHANGE.getText().toString().trim()))
+                        {
+                            databaseReference.setValue(CHANGE.getText().toString().trim()).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {
+                                    Toast.makeText(Account.MainContext,"Changes made successfully",Toast.LENGTH_SHORT).show();
+                                    dialog.dismiss();
+
+                                    Account.fragmentManager.beginTransaction().replace(R.id.content_frame, new userprofile()).commit();
+
+                                }
+                            });
+
+                        }
+                    }
+                });
+
+                dialog.show();
+
+
+            }
+        });
 
 
         Glide.with(userprofile.this)
