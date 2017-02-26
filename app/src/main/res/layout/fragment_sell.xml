@@ -20,6 +20,7 @@
             android:layout_height="match_parent">
 
             <LinearLayout
+                android:layout_marginTop="2dp"
                 android:layout_width="match_parent"
                 android:layout_weight="50"
                 android:orientation="vertical"
@@ -30,12 +31,11 @@
                     android:layout_width="match_parent"
                     android:layout_weight="50"
                     android:weightSum="100"
+                    android:gravity="center"
                     android:orientation="horizontal"
                     android:layout_height="0dp">
-                    <View
-                        android:layout_width="0dp"
-                        android:layout_weight="10"
-                        android:layout_height="match_parent"/>
+
+
 
 
                     <ImageView
@@ -63,10 +63,7 @@
                         android:layout_height="140dp" />
 
 
-                    <View
-                        android:layout_width="0dp"
-                        android:layout_weight="5"
-                        android:layout_height="match_parent"/>
+
 
 
                 </LinearLayout>
@@ -77,12 +74,10 @@
                     android:layout_width="match_parent"
                     android:layout_weight="50"
                     android:weightSum="100"
+                    android:gravity="center"
                     android:orientation="horizontal"
                     android:layout_height="0dp">
-                    <View
-                        android:layout_width="0dp"
-                        android:layout_weight="10"
-                        android:layout_height="match_parent"/>
+
 
 
                     <ImageView
@@ -111,10 +106,7 @@
                         android:layout_height="140dp" />
 
 
-                    <View
-                        android:layout_width="0dp"
-                        android:layout_weight="5"
-                        android:layout_height="match_parent"/>
+
 
 
                 </LinearLayout>
@@ -137,6 +129,7 @@
                 <Spinner
                     android:layout_width="0dp"
                     android:layout_weight="50"
+                    android:gravity="center"
                     android:id="@+id/SPIINER_CATEGORY"
                     android:layout_height="match_parent">
 

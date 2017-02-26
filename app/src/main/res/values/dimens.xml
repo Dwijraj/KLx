@@ -9,4 +9,5 @@
     <dimen name="TextSize">18sp</dimen>
     <dimen name="TextSizeProductShow">13sp</dimen>
     <dimen name="TITLESIZE">20sp</dimen>
+    <dimen name="ImageSize">60dp</dimen>
 </resources>

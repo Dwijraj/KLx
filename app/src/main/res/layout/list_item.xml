@@ -1,43 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:weightSum="100"
+    android:gravity="center"
+    android:layout_marginLeft="4dp"
+    android:layout_marginRight="4dp"
     android:layout_height="match_parent">
 
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
-        android:layout_weight="90"
-        android:id="@+id/CARDVIEW_CONTAINER_ID"
+        android:id="@+id/CARDVIEW_ID"
         android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:weightSum="100"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:layout_weight="100"
             android:orientation="vertical"
             android:layout_height="match_parent">
 
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_weight="50"
+                android:layout_width="wrap_content"
+                android:layout_weight="60"
                 android:orientation="vertical"
                 android:layout_height="0dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_weight="50"
+                    android:layout_weight="49.5"
+                    android:gravity="center"
                     android:weightSum="100"
+                    android:layout_marginBottom="2dp"
                     android:orientation="horizontal"
                     android:layout_height="0dp">
-                    <View
-                        android:layout_width="0dp"
-                        android:layout_weight="10"
-                        android:layout_height="match_parent"/>
+
 
 
                     <ImageView
                         android:layout_width="0dp"
                         android:layout_weight="40"
+                        android:maxHeight="@dimen/ImageSize"
+                        android:maxWidth="@dimen/ImageSize"
+
                         android:scaleType="fitXY"
                         android:background="@mipmap/ic_photo_camera_black_24dp"
                         android:id="@+id/IMAGE_1"
@@ -46,7 +53,7 @@
 
                     <View
                         android:layout_width="0dp"
-                        android:layout_weight="2"
+                        android:layout_weight="1"
                         android:layout_height="match_parent"/>
 
 
@@ -55,43 +62,41 @@
                         android:layout_width="0dp"
                         android:layout_weight="40"
                         android:scaleType="fitXY"
+                        android:maxHeight="@dimen/ImageSize"
+                        android:maxWidth="@dimen/ImageSize"
                         android:background="@mipmap/ic_photo_camera_black_24dp"
                         android:id="@+id/IMAGE_2"
                         android:layout_height="140dp" />
 
 
-                    <View
-                        android:layout_width="0dp"
-                        android:layout_weight="5"
-                        android:layout_height="match_parent"/>
+
 
 
                 </LinearLayout>
-
                 <LinearLayout
+                    android:gravity="center"
                     android:layout_width="match_parent"
-                    android:layout_weight="50"
+                    android:layout_weight="49.5"
                     android:weightSum="100"
+                    android:layout_marginTop="2dp"
                     android:orientation="horizontal"
                     android:layout_height="0dp">
-                    <View
-                        android:layout_width="0dp"
-                        android:layout_weight="10"
-                        android:layout_height="match_parent"/>
-
 
                     <ImageView
 
                         android:scaleType="fitXY"
                         android:layout_width="0dp"
                         android:layout_weight="40"
+                        android:maxHeight="@dimen/ImageSize"
+                        android:maxWidth="@dimen/ImageSize"
+
                         android:background="@mipmap/ic_photo_camera_black_24dp"
                         android:id="@+id/IMAGE_3"
                         android:layout_height="140dp" />
 
                     <View
                         android:layout_width="0dp"
-                        android:layout_weight="2"
+                        android:layout_weight="1"
                         android:layout_height="match_parent"/>
 
 
@@ -102,14 +107,12 @@
                         android:background="@mipmap/ic_photo_camera_black_24dp"
                         android:layout_width="0dp"
                         android:layout_weight="40"
+                        android:maxHeight="@dimen/ImageSize"
+                        android:maxWidth="@dimen/ImageSize"
+
                         android:id="@+id/IMAGE_4"
                         android:layout_height="140dp" />
 
-
-                    <View
-                        android:layout_width="0dp"
-                        android:layout_weight="5"
-                        android:layout_height="match_parent"/>
 
 
                 </LinearLayout>
@@ -119,7 +122,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_weight="50"
+                android:layout_weight="40"
                 android:weightSum="100"
                 android:layout_height="0dp">
 
@@ -127,7 +130,7 @@
                     android:layout_width="0dp"
                     android:layout_weight="50"
                     android:orientation="vertical"
-                    android:weightSum="80"
+                    android:weightSum="100"
                     android:layout_height="match_parent">
 
                     <TextView
@@ -149,7 +152,8 @@
 
                     <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_weight="10"
+                        android:layout_weight="20"
+                        android:gravity="center"
                         android:layout_height="0dp">
 
                         <TextView
@@ -163,7 +167,7 @@
 
                     <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_weight="30"
+                        android:layout_weight="40"
                         android:gravity="center"
                         android:layout_height="0dp">
 
@@ -184,13 +188,13 @@
                     android:layout_width="0dp"
                     android:layout_weight="50"
                     android:orientation="vertical"
-                    android:weightSum="80"
+                    android:weightSum="100"
                     android:layout_height="match_parent">
 
                     <TextView
                         android:id="@+id/PRODUCT_PRICE_ID"
                         android:layout_width="match_parent"
-                        android:gravity="center"
+                        android:gravity="start"
                         android:layout_weight="20"
                         android:layout_height="0dp" />
 
@@ -205,7 +209,7 @@
                         android:layout_width="match_parent"
                         android:gravity="start"
                         android:id="@+id/PRODUCT_DESCRIPTION_ID"
-                        android:layout_weight="40"
+                        android:layout_weight="50"
                         android:layout_height="0dp" />
 
 
@@ -221,7 +225,13 @@
 
 
 
+
+
     </android.support.v7.widget.CardView>
+
+
+
+
 
 
 </LinearLayout>

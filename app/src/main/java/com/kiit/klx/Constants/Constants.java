@@ -16,5 +16,9 @@ public class Constants {
     public static String CANT_CONNECT="Can't connect at the moment please try latter";
     public static String GUEST_ON_TRY_SELL="Guests aren't authorized to sell and buy Please Logout and create an account  to sell";
     public static String PRODUCT_COULDNOT_BE_UPLOAD="Sorry your product could not me uploaded";
+    public static int SCREEN_HEIGHT;
+    public static int SCREEN_WIDTH;
+    public static final int UNIQUE_ID=123476776;
+    public static String ACTION="com.kiit.klx.NEW_PRODUCT";
     public static String[] CATEGORIES=new String[]{CATEGORY_ELECTRONICS,CATEGORY_BOOK,CATEGORY_VEHICLE,CATEGORY_MOBILE};
 }

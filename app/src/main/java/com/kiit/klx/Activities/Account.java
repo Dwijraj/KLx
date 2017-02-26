@@ -9,6 +9,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.text.SpannableString;
 import android.text.style.TextAppearanceSpan;
+import android.util.DisplayMetrics;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -57,6 +58,7 @@ public class Account extends AppCompatActivity
     public static LinearLayout MAIN_LAYOUT_ACCOUNT;
     public static String CATEGORY;
     public static Context MainContext;
+    public static  DisplayMetrics displayMetrics;
     public static  android.support.v4.app.FragmentManager fragmentManager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +66,13 @@ public class Account extends AppCompatActivity
         setContentView(R.layout.activity_account);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+
+        displayMetrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        Constants.SCREEN_WIDTH = displayMetrics.widthPixels/3;
+        Constants.SCREEN_HEIGHT = Constants.SCREEN_WIDTH;
+
 
 
         fragmentManager= getSupportFragmentManager();
@@ -140,7 +149,6 @@ public class Account extends AppCompatActivity
 
         navigationView.setNavigationItemSelectedListener(this);
     }
-
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

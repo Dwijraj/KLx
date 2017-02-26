@@ -8,10 +8,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.kiit.klx.Activities.Account;
+import com.kiit.klx.Constants.Constants;
 import com.kiit.klx.Model.Items;
 import com.kiit.klx.R;
 
@@ -93,6 +95,15 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             IMG2=(ImageView) itemView.findViewById(R.id.IMAGE_2);
             IMG3=(ImageView) itemView.findViewById(R.id.IMAGE_3);
             IMG4=(ImageView) itemView.findViewById(R.id.IMAGE_4);
+            IMG1.setLayoutParams(new LinearLayout.LayoutParams(Constants.SCREEN_WIDTH,Constants.SCREEN_HEIGHT));
+            //IMG1.setBackground(getResources().getDrawable(R.mipmap.ic_photo_camera_black_24dp));
+            IMG2.setLayoutParams(new LinearLayout.LayoutParams(Constants.SCREEN_WIDTH,Constants.SCREEN_HEIGHT));
+            //IMG2.setBackground(getResources().getDrawable(R.mipmap.ic_photo_camera_black_24dp));
+            IMG3.setLayoutParams(new LinearLayout.LayoutParams(Constants.SCREEN_WIDTH,Constants.SCREEN_HEIGHT));
+            //IMG3.setBackground(getResources().getDrawable(R.mipmap.ic_photo_camera_black_24dp));
+            IMG4.setLayoutParams(new LinearLayout.LayoutParams(Constants.SCREEN_WIDTH,Constants.SCREEN_HEIGHT));
+            //IMG4.setBackground(getResources().getDrawable(R.mipmap.ic_photo_camera_black_24dp));
+
             Price=(TextView) itemView.findViewById(R.id.PRODUCT_PRICE_ID);
             ProductName=(TextView) itemView.findViewById(R.id.PRODUCT_NAME_ID);
             Description=(TextView) itemView.findViewById(R.id.PRODUCT_DESCRIPTION_ID);

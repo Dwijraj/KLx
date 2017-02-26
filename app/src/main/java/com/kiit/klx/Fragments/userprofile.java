@@ -14,6 +14,7 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -69,6 +70,7 @@ public class userprofile extends Fragment  {
         Mobile.setText(Account.LOGGED_IN_USER_DETAIL.Mobile);
 
 
+
         databaseReference= FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid()).child("Mobile");
         EDIT.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -82,6 +84,8 @@ public class userprofile extends Fragment  {
 
                 final EditText CHANGE=(EditText) dialog.findViewById(R.id.CHANGE_EDIT_TEXT);
                 Button   SUBMIT=(Button)   dialog.findViewById(R.id.CONFIRM_CHANGES);
+                LinearLayout MAIN=(LinearLayout) dialog.findViewById(R.id.CHANGE_LAYOUT);
+                MAIN.setLayoutParams(new LinearLayout.LayoutParams((Constants.SCREEN_WIDTH*3),150));
 
                 SUBMIT.setOnClickListener(new View.OnClickListener() {
                     @Override

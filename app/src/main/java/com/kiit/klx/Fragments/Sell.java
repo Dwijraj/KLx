@@ -1,5 +1,7 @@
 package com.kiit.klx.Fragments;
 
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -7,6 +9,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.NotificationCompat;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -17,6 +20,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -31,10 +35,13 @@ import com.google.firebase.storage.UploadTask;
 import com.kiit.klx.Activities.Account;
 import com.kiit.klx.Constants.Constants;
 import com.kiit.klx.R;
+import com.kiit.klx.Servicenbroadcastreceiver.Notify;
 
 import java.io.ByteArrayOutputStream;
 
 import static android.app.Activity.RESULT_OK;
+import static android.content.Context.NOTIFICATION_SERVICE;
+import static com.kiit.klx.Constants.Constants.UNIQUE_ID;
 
 
 public class Sell extends Fragment {
@@ -94,6 +101,15 @@ public class Sell extends Fragment {
         CATEGORY_LIST.setAdapter(adapter);
 
 
+
+        IMAGE1.setLayoutParams(new LinearLayout.LayoutParams(Constants.SCREEN_WIDTH,Constants.SCREEN_HEIGHT));
+        IMAGE1.setBackground(getResources().getDrawable(R.mipmap.ic_photo_camera_black_24dp));
+        IMAGE2.setLayoutParams(new LinearLayout.LayoutParams(Constants.SCREEN_WIDTH,Constants.SCREEN_HEIGHT));
+        IMAGE2.setBackground(getResources().getDrawable(R.mipmap.ic_photo_camera_black_24dp));
+        IMAGE3.setLayoutParams(new LinearLayout.LayoutParams(Constants.SCREEN_WIDTH,Constants.SCREEN_HEIGHT));
+        IMAGE3.setBackground(getResources().getDrawable(R.mipmap.ic_photo_camera_black_24dp));
+        IMAGE4.setLayoutParams(new LinearLayout.LayoutParams(Constants.SCREEN_WIDTH,Constants.SCREEN_HEIGHT));
+        IMAGE4.setBackground(getResources().getDrawable(R.mipmap.ic_photo_camera_black_24dp));
         IMAGE1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -172,6 +188,9 @@ public class Sell extends Fragment {
         progressDialog.show();
         final DatabaseReference DF=databaseReference.child("Category").child(CATEGORY_SELECTED).push();
 
+
+        Log.v("PUSHING",DF.getKey());
+
         final StorageReference ST=storageReference.child("Uploads").child(mAuth.getCurrentUser().getUid()).child(DF.getRef().toString());
 
         ST.child("IMAGE1").putBytes(IMG1).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
@@ -188,7 +207,21 @@ public class Sell extends Fragment {
 
                                 ST.child("IMAGE4").putBytes(IMG4).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                                     @Override
-                                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot4) {
+                                    public void onSuccess(final UploadTask.TaskSnapshot taskSnapshot4) {
+
+
+
+
+                                                DatabaseReference ST =databaseReference.child("Uploads").child(mAuth.getCurrentUser().getUid()).child(DF.getKey());
+
+                                                ST.child("Price").setValue(price);
+                                                ST.child("ProductName").setValue(name);
+                                                ST.child("Description").setValue(description);
+                                                ST.child("IMAGE1").setValue(taskSnapshot1.getDownloadUrl().toString());
+                                                ST.child("IMAGE2").setValue(taskSnapshot2.getDownloadUrl().toString());
+                                                ST.child("IMAGE3").setValue(taskSnapshot3.getDownloadUrl().toString());
+                                                ST.child("IMAGE4").setValue(taskSnapshot4.getDownloadUrl().toString());
+                                                ST.child("UploaderID").setValue(mAuth.getCurrentUser().getUid());
 
 
 
@@ -205,6 +238,27 @@ public class Sell extends Fragment {
                                         DF.child("IMAGE3").setValue(taskSnapshot3.getDownloadUrl().toString());
                                         DF.child("IMAGE4").setValue(taskSnapshot4.getDownloadUrl().toString());
                                         DF.child("UploaderID").setValue(mAuth.getCurrentUser().getUid());
+
+
+                                        NotificationCompat.Builder notification;
+
+                                        notification= new NotificationCompat.Builder(Account.MainContext);
+                                        notification.setAutoCancel(true);
+
+
+                                        notification.setSmallIcon(R.mipmap.ic_add_shopping_cart_white_24dp);
+                                        notification.setTicker("Notification from KLX");
+                                        notification.setWhen(System.currentTimeMillis());
+                                        notification.setContentTitle("KLX");
+                                        notification.setContentText("Uploaded successfully");
+
+                                        Intent intents=new  Intent(Account.MainContext,Account.class);
+                                        PendingIntent pendingIntent=PendingIntent.getActivity(Account.MainContext,0,intents,PendingIntent.FLAG_NO_CREATE);
+                                        notification.setContentIntent(pendingIntent);
+
+                                        NotificationManager nm=(NotificationManager) Account.MainContext.getSystemService(NOTIFICATION_SERVICE);
+                                        nm.notify(UNIQUE_ID,notification.build());
+
                                         progressDialog.dismiss();
 
 
@@ -274,19 +328,19 @@ public class Sell extends Fragment {
                 case IMAGE1_REQ:
                                 IMG1=stream.toByteArray();
                                 IMAGE1.setImageBitmap(Picture);
-                                break;
+                              //  break;
                 case IMAGE2_REQ:
                                 IMG2=stream.toByteArray();
                                 IMAGE2.setImageBitmap(Picture);
-                                break;
+                              //  break;
                 case IMAGE3_REQ:
                                 IMG3=stream.toByteArray();
                                 IMAGE3.setImageBitmap(Picture);
-                                break;
+                              //  break;
                 case IMAGE4_REQ:
                                 IMG4=stream.toByteArray();
                                 IMAGE4.setImageBitmap(Picture);
-                                break;
+                              //  break;
 
 
             }
