@@ -65,9 +65,29 @@ public class userprofile extends Fragment  {
 
         Name.setText(Account.LOGGED_IN_USER_DETAIL.DisplayName);
         Email.setText(Account.LOGGED_IN_USER_DETAIL.Email);
-        Uploads.setText(Account.LOGGED_IN_USER_DETAIL.Uploads);
-        Bought.setText(Account.LOGGED_IN_USER_DETAIL.Bought);
-        Mobile.setText(Account.LOGGED_IN_USER_DETAIL.Mobile);
+
+        if (Account.LOGGED_IN_USER_DETAIL.Email.equals(Constants.GUEST_EMAIL))
+        {
+            EDIT.setVisibility(View.INVISIBLE);
+            EDIT.setEnabled(false);
+
+            Reset_Email.setVisibility(View.INVISIBLE);
+            Reset_Email.setEnabled(false);
+
+            Uploads.setText("N/A");
+            Bought.setText("N/A");
+            Mobile.setText("N/A");
+
+        }
+        else
+        {
+
+            Uploads.setText(Account.LOGGED_IN_USER_DETAIL.Uploads);
+            Bought.setText(Account.LOGGED_IN_USER_DETAIL.Bought);
+            Mobile.setText(Account.LOGGED_IN_USER_DETAIL.Mobile);
+
+        }
+
 
 
 
@@ -120,12 +140,9 @@ public class userprofile extends Fragment  {
                 .into(Profile_pic);
 
 
-        if (Account.LOGGED_IN_USER_DETAIL.Email.equals(Constants.GUEST_EMAIL))
-        {
-            Reset_Email.setVisibility(View.INVISIBLE);
-            Reset_Email.setEnabled(false);
-        }
-        else {
+
+
+
 
             Reset_Email.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -169,7 +186,7 @@ public class userprofile extends Fragment  {
 
                 }
             });
-        }
+
 
 
         return view;

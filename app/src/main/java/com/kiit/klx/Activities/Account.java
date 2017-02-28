@@ -251,7 +251,7 @@ public class Account extends AppCompatActivity
 
            if(!(LOGGED_IN_USER_DETAIL.Email.equals(Constants.NOT_LOGGEDIN))) {
                if (!LOGGED_IN_USER_DETAIL.Email.equals(Constants.GUEST_EMAIL)) {
-                   fragmentManager.beginTransaction().replace(R.id.content_frame, new Sell()).commit();
+                 //  fragmentManager.beginTransaction().replace(R.id.content_frame, new Sell()).commit();
 
 
 

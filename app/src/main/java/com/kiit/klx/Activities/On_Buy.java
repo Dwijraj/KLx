@@ -13,10 +13,14 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.kiit.klx.Adapter.RecyclerViewAdapter;
 import com.kiit.klx.Constants.Constants;
+import com.kiit.klx.Model.User;
 import com.kiit.klx.R;
 
 public class On_Buy extends AppCompatActivity {
@@ -32,12 +36,15 @@ public class On_Buy extends AppCompatActivity {
     private Button BUYNOW;
     private Dialog dialog;
     private ImageView ZOOMED;
-
+    private TextView Seller_email;
+    private TextView Seller_Mobile;
+    private DatabaseReference databaseReference;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_on__buy);
 
+        databaseReference=FirebaseDatabase.getInstance().getReference().child("Users");
         IMG1=(ImageView) findViewById(R.id.IMAGE_1_ON_BUY);
         IMG2=(ImageView) findViewById(R.id.IMAGE_2_ON_BUY);
         IMG3=(ImageView) findViewById(R.id.IMAGE_3_ON_BUY);
@@ -98,14 +105,35 @@ public class On_Buy extends AppCompatActivity {
                 ZOOM(RecyclerViewAdapter.ITEM_SELECTED.IMAGE4);
             }
         });
-
-
-
         Price=(TextView) findViewById(R.id.PRODUCT_PRICE_ID_ON_BUY);
         ProductName=(TextView) findViewById(R.id.PRODUCT_NAME_ID_ON_BUY);
         Description=(TextView) findViewById(R.id.PRODUCT_DESCRIPTION_ID_ON_BUY);
         KARTBUY=(Button) findViewById(R.id.KART_ON_BUY);
         BUYNOW=(Button) findViewById(R.id.BUY_NOW_ON_BUY);
+        Seller_email=(TextView) findViewById(R.id.SELLER_ID);
+        Seller_Mobile=(TextView) findViewById(R.id.SELLER_MOBILE);
+
+        Price.setText(RecyclerViewAdapter.ITEM_SELECTED.Price);
+        ProductName.setText(RecyclerViewAdapter.ITEM_SELECTED.ProductName);
+        Description.setText(RecyclerViewAdapter.ITEM_SELECTED.Description);
+
+        databaseReference.child(RecyclerViewAdapter.ITEM_SELECTED.UploaderID).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                User SELLER= dataSnapshot.getValue(User.class);
+                Seller_email.setText(SELLER.DisplayName);
+                Seller_Mobile.setText(SELLER.Mobile);
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+
 
         KARTBUY.setOnClickListener(new View.OnClickListener() {
             @Override

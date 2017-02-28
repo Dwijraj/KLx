@@ -3,6 +3,7 @@ package com.kiit.klx.Adapter;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.support.design.widget.Snackbar;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -12,15 +13,20 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.google.firebase.auth.FirebaseAuth;
 import com.kiit.klx.Activities.Account;
 import com.kiit.klx.Activities.On_Buy;
 import com.kiit.klx.Constants.Constants;
+import com.kiit.klx.Fragments.Sell;
 import com.kiit.klx.Model.Items;
 import com.kiit.klx.R;
 
 import java.util.ArrayList;
+
+import static com.kiit.klx.Activities.Account.LOGGED_IN_USER_DETAIL;
 
 /**
  * Created by 1405214 on 24-02-2017.
@@ -31,11 +37,13 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     private LayoutInflater inflater;
     private Context Main;
     public static Items ITEM_SELECTED;
+    private FirebaseAuth mAuth;
 
-    public RecyclerViewAdapter(ArrayList<Items> listData, Context c) {
+    public RecyclerViewAdapter(ArrayList<Items> listData, Context c,FirebaseAuth auth) {
         this.ListData = listData;
         this.inflater=LayoutInflater.from(c);
         Main=c;
+        mAuth=auth;
     }
 
     @Override
@@ -121,8 +129,25 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                     Log.v("Postion",getPosition()+""+ITEM_SELECTED.ProductName);
                     // Redirect to Buy Page
 
-                    Intent On_Buy=new Intent(Main, com.kiit.klx.Activities.On_Buy.class);
-                    Main.startActivity(On_Buy);
+                    if(!(Account.LOGGED_IN_USER_DETAIL.Email.equals(Constants.NOT_LOGGEDIN))) {
+                        if (!Account.LOGGED_IN_USER_DETAIL.Email.equals(Constants.GUEST_EMAIL)) {
+                         //   fragmentManager.beginTransaction().replace(R.id.content_frame, new Sell()).commit();
+
+                            Intent On_Buy=new Intent(Main, com.kiit.klx.Activities.On_Buy.class);
+                            Main.startActivity(On_Buy);
+
+
+                        }
+                        else
+                        {
+                            Toast.makeText(Account.MainContext,"Guest's aren't authorized to purchase",Toast.LENGTH_SHORT).show();
+                            //Snackbar.make(MAIN_LAYOUT_ACCOUNT,Constants.GUEST_ON_TRY_SELL,Snackbar.LENGTH_INDEFINITE).show();
+                        }
+                    } else {
+                       // Snackbar.make(MAIN_LAYOUT_ACCOUNT, Constants.CANT_CONNECT, Snackbar.LENGTH_INDEFINITE).show();
+
+                    }
+
 
                 }
             });

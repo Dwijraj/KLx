@@ -3,9 +3,6 @@
     android:orientation="vertical"
     android:layout_width="wrap_content"
     android:weightSum="100"
-    android:gravity="center"
-    android:layout_marginLeft="4dp"
-    android:layout_marginRight="4dp"
     android:layout_height="match_parent">
 
     <android.support.v7.widget.CardView
@@ -17,7 +14,6 @@
             android:layout_width="match_parent"
             android:weightSum="100"
             android:layout_marginTop="20dp"
-            android:layout_marginBottom="20dp"
             android:layout_weight="100"
             android:orientation="vertical"
             android:layout_height="match_parent">
@@ -122,7 +118,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_weight="40"
+                android:layout_weight="39.5"
                 android:weightSum="100"
                 android:layout_height="0dp">
 
@@ -136,7 +132,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:gravity="center"
-                        android:text="PRICE :"
+                        android:text="PRICE  (₹):"
                         android:textSize="@dimen/TextSizeProductShow"
                         android:layout_weight="20"
                         android:layout_height="0dp" />
@@ -194,20 +190,20 @@
                     <TextView
                         android:id="@+id/PRODUCT_PRICE_ID"
                         android:layout_width="match_parent"
-                        android:gravity="start"
+                        android:gravity="center"
                         android:layout_weight="20"
                         android:layout_height="0dp" />
 
                     <TextView
                         android:layout_width="match_parent"
-                        android:gravity="start"
+                        android:gravity="center"
                         android:id="@+id/PRODUCT_NAME_ID"
                         android:layout_weight="20"
                         android:layout_height="0dp" />
 
                     <TextView
                         android:layout_width="match_parent"
-                        android:gravity="start"
+                        android:gravity="center"
                         android:id="@+id/PRODUCT_DESCRIPTION_ID"
                         android:layout_weight="50"
                         android:layout_height="0dp" />
@@ -217,6 +213,16 @@
 
 
                 </LinearLayout>
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_weight="0.5"
+                android:layout_height="0dp">
+                <View
+                    android:layout_width="match_parent"
+                    android:background="#000"
+                    android:layout_height="2dp"/>
 
             </LinearLayout>
 

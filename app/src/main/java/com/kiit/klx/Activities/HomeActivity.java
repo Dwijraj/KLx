@@ -139,14 +139,14 @@ public class HomeActivity extends AppCompatActivity {
 
                                     progressDialog.dismiss();
 
-                                    Toast.makeText(getApplicationContext(),"Signed in successfully",Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getApplicationContext(),"Welcome Back!",Toast.LENGTH_SHORT).show();
 
-                                    Intent DISPLAY_DETAILS=new Intent(HomeActivity.this,Account.class);
-                                    finish();
-                                    startActivity(DISPLAY_DETAILS);
+                            Intent DISPLAY_DETAILS=new Intent(HomeActivity.this,Account.class);
+                            finish();
+                            startActivity(DISPLAY_DETAILS);
 
-                                }
-                            }).addOnFailureListener(new OnFailureListener() {
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
                                 @Override
                                 public void onFailure(@NonNull Exception e) {
 

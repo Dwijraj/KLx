@@ -157,7 +157,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:gravity="center"
-                        android:text="PRICE :"
+                        android:text="PRICE (₹):"
                         android:textSize="@dimen/TextSizeProductShow"
                         android:layout_weight="20"
                         android:layout_height="0dp" />
