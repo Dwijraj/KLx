@@ -70,10 +70,10 @@
             android:name=".Servicenbroadcastreceiver.Notify"
             android:enabled="true"
             android:exported="true">
-
             <action android:name="com.kiit.klx.NEW_PRODUCT" />
-
         </receiver>
+
+        <activity android:name=".Activities.On_Buy"></activity>
     </application>
 
 </manifest>

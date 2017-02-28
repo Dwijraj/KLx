@@ -2,7 +2,9 @@ package com.kiit.klx.Adapter;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +15,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.kiit.klx.Activities.Account;
+import com.kiit.klx.Activities.On_Buy;
 import com.kiit.klx.Constants.Constants;
 import com.kiit.klx.Model.Items;
 import com.kiit.klx.R;
@@ -27,7 +30,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     private ArrayList<Items> ListData;
     private LayoutInflater inflater;
     private Context Main;
-
+    public static Items ITEM_SELECTED;
 
     public RecyclerViewAdapter(ArrayList<Items> listData, Context c) {
         this.ListData = listData;
@@ -113,7 +116,14 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             Buy.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+
+                    ITEM_SELECTED=ListData.get(getPosition());
+                    Log.v("Postion",getPosition()+""+ITEM_SELECTED.ProductName);
                     // Redirect to Buy Page
+
+                    Intent On_Buy=new Intent(Main, com.kiit.klx.Activities.On_Buy.class);
+                    Main.startActivity(On_Buy);
+
                 }
             });
 

@@ -245,6 +245,26 @@ public class Account extends AppCompatActivity
 
            }
        }
+       else if (id == R.id.MyBag) {
+
+           //fragmentManager.beginTransaction().replace(R.id.content_frame, new Sell()).commit();
+
+           if(!(LOGGED_IN_USER_DETAIL.Email.equals(Constants.NOT_LOGGEDIN))) {
+               if (!LOGGED_IN_USER_DETAIL.Email.equals(Constants.GUEST_EMAIL)) {
+                   fragmentManager.beginTransaction().replace(R.id.content_frame, new Sell()).commit();
+
+
+
+               }
+               else
+               {
+                   Snackbar.make(MAIN_LAYOUT_ACCOUNT,Constants.GUEST_ON_TRY_SELL,Snackbar.LENGTH_INDEFINITE).show();
+               }
+           } else {
+               Snackbar.make(MAIN_LAYOUT_ACCOUNT, Constants.CANT_CONNECT, Snackbar.LENGTH_INDEFINITE).show();
+
+           }
+       }
         else if (id == R.id.nav_profile) {
 
            // fragmentManager.beginTransaction().replace(R.id.content_frame, new userprofile()).commit();

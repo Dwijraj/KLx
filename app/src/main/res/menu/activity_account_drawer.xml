@@ -11,6 +11,10 @@
             android:id="@+id/nav_profile"
             android:icon="@mipmap/ic_account_circle_white_24dp"
             android:title="My Profile" />
+        <item
+            android:id="@+id/MyBag"
+            android:title="My Bag"
+            android:icon="@mipmap/ic_card_travel_white_24dp"/>
     </group>
 
     <item android:title="Buy"
