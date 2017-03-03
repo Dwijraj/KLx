@@ -14,11 +14,12 @@ public class Items {
     public String IMAGE3;
     public String IMAGE4;
     public String UploaderID;
+    public String BAGValue;
 
     public Items() {
     }
 
-    public Items(String price, String productName, String description, String IMAGE1, String IMAGE2, String IMAGE3, String IMAGE4, String uploaderID) {
+    public Items(String price, String productName, String description, String IMAGE1, String IMAGE2, String IMAGE3, String IMAGE4, String uploaderID, String BAGValue) {
         Price = price;
         ProductName = productName;
         Description = description;
@@ -27,5 +28,6 @@ public class Items {
         this.IMAGE3 = IMAGE3;
         this.IMAGE4 = IMAGE4;
         UploaderID = uploaderID;
+        this.BAGValue = BAGValue;
     }
 }

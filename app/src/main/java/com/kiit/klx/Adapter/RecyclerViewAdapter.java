@@ -39,6 +39,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     public static Items ITEM_SELECTED;
     private FirebaseAuth mAuth;
 
+
     public RecyclerViewAdapter(ArrayList<Items> listData, Context c,FirebaseAuth auth) {
         this.ListData = listData;
         this.inflater=LayoutInflater.from(c);
