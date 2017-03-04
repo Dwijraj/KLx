@@ -8,6 +8,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -154,8 +155,10 @@ public class On_Buy extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
 
-                    AlertDialog.Builder builder=new AlertDialog.Builder(Account.MainContext);
-                    builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    Log.v("Clicked","Click");
+
+                     Account.builders=new AlertDialog.Builder(On_Buy.this);
+                    Account.builders.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
 
@@ -175,17 +178,17 @@ public class On_Buy extends AppCompatActivity {
 
                         }
                     });
-                    builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    Account.builders.setNegativeButton("No", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
 
                             dialog.dismiss();
                         }
                     });
-                    builder.setMessage("Confirm your choice");
-                    builder.setTitle("Remove Confirm");
+                    Account.builders.setMessage("Confirm your choice");
+                    Account.builders.setTitle("Remove Confirm");
 
-                    AlertDialog dialog2=builder.create();
+                   final AlertDialog dialog2=Account.builders.create();
                     dialog2.show();
 
 

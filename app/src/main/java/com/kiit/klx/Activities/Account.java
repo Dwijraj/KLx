@@ -55,7 +55,7 @@ public class Account extends AppCompatActivity
     private FirebaseAuth mAuth;
     public static User LOGGED_IN_USER_DETAIL;
     private ImageView imageView;
-    private AlertDialog.Builder builders;
+    public static AlertDialog.Builder builders;
     public static LinearLayout MAIN_LAYOUT_ACCOUNT;
     public static String CATEGORY;
     public static Context MainContext;
