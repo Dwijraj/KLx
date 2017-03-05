@@ -49,6 +49,7 @@ public class On_Buy extends AppCompatActivity {
     private TextView Seller_Mobile;
     private DatabaseReference databaseReference;
     public User SELLER;
+    public static String ITEM_SELECTED_UID;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -197,35 +198,49 @@ public class On_Buy extends AppCompatActivity {
             });
 
         }
+        else if(MyBag.VISIBILITY_FLAG.equals("2"))
+        {
+            KARTBUY.setVisibility(View.INVISIBLE);
+            KARTBUY.setEnabled(false);
+            CONTACTSELLER.setVisibility(View.INVISIBLE);
+            CONTACTSELLER.setEnabled(false);
+        }
         else
         {
+            if(SELLER.Uid.equals(FirebaseAuth.getInstance().getCurrentUser().getUid()))
+            {
+                KARTBUY.setEnabled(false);
 
-            KARTBUY.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
+            }
+            else
+            {
 
-                    DatabaseReference KART= FirebaseDatabase.getInstance().getReference().child("Bag").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).push();
-                    KART.child("Price").setValue(RecyclerViewAdapter.ITEM_SELECTED.Price);
-                    KART.child("ProductName").setValue(RecyclerViewAdapter.ITEM_SELECTED.ProductName);
-                    KART.child("Description").setValue(RecyclerViewAdapter.ITEM_SELECTED.Description);
-                    KART.child("IMAGE1").setValue(RecyclerViewAdapter.ITEM_SELECTED.IMAGE1);
-                    KART.child("IMAGE2").setValue(RecyclerViewAdapter.ITEM_SELECTED.IMAGE2);
-                    KART.child("IMAGE3").setValue(RecyclerViewAdapter.ITEM_SELECTED.IMAGE3);
-                    KART.child("IMAGE4").setValue(RecyclerViewAdapter.ITEM_SELECTED.IMAGE4);
-                    KART.child("BAGValue").setValue(KART.getRef().toString());
-                    KART.child("UploaderID").setValue(RecyclerViewAdapter.ITEM_SELECTED.UploaderID).addOnSuccessListener(new OnSuccessListener<Void>() {
-                        @Override
-                        public void onSuccess(Void aVoid) {
+                KARTBUY.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
 
-                            Toast.makeText(Account.MainContext,"Item added in your bag",Toast.LENGTH_SHORT).show();
+                        DatabaseReference KART= FirebaseDatabase.getInstance().getReference().child("Bag").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).push();
+                        KART.child("Price").setValue(RecyclerViewAdapter.ITEM_SELECTED.Price);
+                        KART.child("ProductName").setValue(RecyclerViewAdapter.ITEM_SELECTED.ProductName);
+                        KART.child("Description").setValue(RecyclerViewAdapter.ITEM_SELECTED.Description);
+                        KART.child("IMAGE1").setValue(RecyclerViewAdapter.ITEM_SELECTED.IMAGE1);
+                        KART.child("IMAGE2").setValue(RecyclerViewAdapter.ITEM_SELECTED.IMAGE2);
+                        KART.child("IMAGE3").setValue(RecyclerViewAdapter.ITEM_SELECTED.IMAGE3);
+                        KART.child("IMAGE4").setValue(RecyclerViewAdapter.ITEM_SELECTED.IMAGE4);
+                        KART.child("BAGValue").setValue(KART.getRef().toString());
+                        KART.child("UploaderID").setValue(RecyclerViewAdapter.ITEM_SELECTED.UploaderID).addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
 
-                        }
-                    });
+                                Toast.makeText(Account.MainContext,"Item added in your bag",Toast.LENGTH_SHORT).show();
 
-                }
-            });
+                            }
+                        });
 
+                    }
+                });
 
+            }
         }
 
 

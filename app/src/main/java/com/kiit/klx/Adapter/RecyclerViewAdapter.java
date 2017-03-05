@@ -1,9 +1,7 @@
 package com.kiit.klx.Adapter;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.support.design.widget.Snackbar;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -18,9 +16,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
 import com.kiit.klx.Activities.Account;
-import com.kiit.klx.Activities.On_Buy;
 import com.kiit.klx.Constants.Constants;
-import com.kiit.klx.Fragments.Sell;
 import com.kiit.klx.Model.Items;
 import com.kiit.klx.R;
 
@@ -148,9 +144,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                        // Snackbar.make(MAIN_LAYOUT_ACCOUNT, Constants.CANT_CONNECT, Snackbar.LENGTH_INDEFINITE).show();
 
                     }
-
-
-                }
+            }
             });
 
         }
