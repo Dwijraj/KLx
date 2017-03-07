@@ -36,6 +36,7 @@ import com.kiit.klx.Fragments.Category_Searched;
 import com.kiit.klx.Constants.Constants;
 import com.kiit.klx.Fragments.Display_Details_Change;
 import com.kiit.klx.Fragments.MyBag;
+import com.kiit.klx.Fragments.MyUploads;
 import com.kiit.klx.Model.User;
 import com.kiit.klx.R;
 import com.kiit.klx.Fragments.Sell;
@@ -173,8 +174,7 @@ public class Account extends AppCompatActivity
                     {
                         mAuth.signOut();
                     }
-                    finish();
-
+                    android.os.Process.killProcess(android.os.Process.myPid());
 
                 }
             });
@@ -251,6 +251,7 @@ public class Account extends AppCompatActivity
            if(!(LOGGED_IN_USER_DETAIL.Email.equals(Constants.NOT_LOGGEDIN))) {
                if (!LOGGED_IN_USER_DETAIL.Email.equals(Constants.GUEST_EMAIL)) {
 
+                   fragmentManager.beginTransaction().replace(R.id.content_frame, new MyUploads()).commit();
 
 
 

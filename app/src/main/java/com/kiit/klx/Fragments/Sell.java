@@ -222,6 +222,7 @@ public class Sell extends Fragment {
                                                 ST.child("IMAGE3").setValue(taskSnapshot3.getDownloadUrl().toString());
                                                 ST.child("IMAGE4").setValue(taskSnapshot4.getDownloadUrl().toString());
                                                 ST.child("UploaderID").setValue(mAuth.getCurrentUser().getUid());
+                                                ST.child("Category").setValue(CATEGORY_SELECTED);
 
 
 

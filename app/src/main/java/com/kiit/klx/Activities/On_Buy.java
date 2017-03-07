@@ -29,6 +29,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.kiit.klx.Adapter.RecyclerViewAdapter;
 import com.kiit.klx.Constants.Constants;
 import com.kiit.klx.Fragments.MyBag;
+import com.kiit.klx.Fragments.MyUploads;
 import com.kiit.klx.Model.User;
 import com.kiit.klx.R;
 
@@ -138,6 +139,16 @@ public class On_Buy extends AppCompatActivity {
                 Seller_email.setText(SELLER.DisplayName);
                 Seller_Mobile.setText(SELLER.Mobile);
 
+                if(SELLER.Uid.equals(MyUploads.mauth.getCurrentUser().getUid()))
+                {
+                    KARTBUY.setVisibility(View.INVISIBLE);
+                    KARTBUY.setEnabled(false);
+                    LinearLayout linearLayout=  (LinearLayout) findViewById(R.id.BACKGROUND);
+                    linearLayout.setVisibility(View.INVISIBLE);
+
+                }
+
+
             }
 
             @Override
@@ -207,13 +218,6 @@ public class On_Buy extends AppCompatActivity {
         }
         else
         {
-            if(SELLER.Uid.equals(FirebaseAuth.getInstance().getCurrentUser().getUid()))
-            {
-                KARTBUY.setEnabled(false);
-
-            }
-            else
-            {
 
                 KARTBUY.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -240,7 +244,7 @@ public class On_Buy extends AppCompatActivity {
                     }
                 });
 
-            }
+
         }
 
 

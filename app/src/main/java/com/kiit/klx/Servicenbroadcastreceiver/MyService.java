@@ -6,6 +6,8 @@ import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
 import android.support.v4.app.NotificationCompat;
+import android.util.Log;
+import android.widget.Toast;
 
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -19,6 +21,8 @@ import com.kiit.klx.Constants.Constants;
 import com.kiit.klx.R;
 
 import java.util.HashMap;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import static com.kiit.klx.Constants.Constants.UNIQUE_ID;
 
@@ -55,6 +59,15 @@ public class MyService extends Service {
 
 
 
+     /*   new Timer().scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+
+              //  Toast.makeText(getApplicationContext(),"Timer Task",Toast.LENGTH_SHORT).show();
+
+                Log.v("Dwijraj","Running");
+            }
+        },0,3000); */
 
         mAuth = FirebaseAuth.getInstance();                 //Gets the firebase auth
 

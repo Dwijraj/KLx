@@ -32,14 +32,14 @@ public class Category_Searched extends Fragment {
     private DatabaseReference productlist;
     private ArrayList<Items> PRODUCTS=new ArrayList<>();
     private RecyclerViewAdapter recyclerViewAdapter;
-    private FirebaseAuth mauth;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
         VISIBILITY_FLAG="1";
-        mauth=FirebaseAuth.getInstance();
+        MyUploads.mauth=FirebaseAuth.getInstance();
         View view= inflater.inflate(R.layout.fragment_category__searched, container, false);
         recyclerView= (RecyclerView) view.findViewById(R.id.CATEGORYSEARCHED_RECYCLERVIEW_ID);
         recyclerView.setLayoutManager(new LinearLayoutManager(Account.MainContext));
@@ -56,7 +56,7 @@ public class Category_Searched extends Fragment {
                         PRODUCTS.add(Product);
 
                     }
-                    recyclerViewAdapter=new RecyclerViewAdapter(PRODUCTS,Account.MainContext,mauth);
+                    recyclerViewAdapter=new RecyclerViewAdapter(PRODUCTS,Account.MainContext,MyUploads.mauth);
                     recyclerView.setAdapter(recyclerViewAdapter);
 
                 }

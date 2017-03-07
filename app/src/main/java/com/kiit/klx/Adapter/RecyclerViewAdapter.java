@@ -15,8 +15,15 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.kiit.klx.Activities.Account;
 import com.kiit.klx.Constants.Constants;
+import com.kiit.klx.Fragments.MyBag;
+import com.kiit.klx.Fragments.MyUploads;
 import com.kiit.klx.Model.Items;
 import com.kiit.klx.R;
 
@@ -34,6 +41,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     private Context Main;
     public static Items ITEM_SELECTED;
     private FirebaseAuth mAuth;
+    public static DatabaseReference TODELETE;
+    public static String KEY;
 
 
     public RecyclerViewAdapter(ArrayList<Items> listData, Context c,FirebaseAuth auth) {
@@ -41,6 +50,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         this.inflater=LayoutInflater.from(c);
         Main=c;
         mAuth=auth;
+        TODELETE= FirebaseDatabase.getInstance().getReference().child("Uploads").child(mAuth.getCurrentUser().getUid());
     }
 
     @Override
@@ -117,35 +127,96 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             Description=(TextView) itemView.findViewById(R.id.PRODUCT_DESCRIPTION_ID);
             Buy=(Button) itemView.findViewById(R.id.BUY_BUTTON);
 
+            if(MyBag.VISIBILITY_FLAG.equals("2"))
+            {
+                Buy.setText("Remove Item");
+                Buy.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        ITEM_SELECTED=ListData.get(getPosition());
 
-            Buy.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
+                        FirebaseDatabase.getInstance().getReference().child("Uploads").child(mAuth.getCurrentUser().getUid()).addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
 
-                    ITEM_SELECTED=ListData.get(getPosition());
-                    Log.v("Postion",getPosition()+""+ITEM_SELECTED.ProductName);
-                    // Redirect to Buy Page
+                                for (DataSnapshot dataSnapshot1:dataSnapshot.getChildren())
+                                {
+                                    Items todel=dataSnapshot1.getValue(Items.class);
 
-                    if(!(Account.LOGGED_IN_USER_DETAIL.Email.equals(Constants.NOT_LOGGEDIN))) {
-                        if (!Account.LOGGED_IN_USER_DETAIL.Email.equals(Constants.GUEST_EMAIL)) {
-                         //   fragmentManager.beginTransaction().replace(R.id.content_frame, new Sell()).commit();
+                                    if(todel.IMAGE1.equals(ITEM_SELECTED.IMAGE1))
+                                    {
+                                        FirebaseDatabase.getInstance().getReference().child("Uploads").child(mAuth.getCurrentUser().getUid()).child(dataSnapshot1.getKey()).setValue(null);
+                                    }
 
-                            Intent On_Buy=new Intent(Main, com.kiit.klx.Activities.On_Buy.class);
-                            Main.startActivity(On_Buy);
+                                }
 
 
-                        }
-                        else
-                        {
-                            Toast.makeText(Account.MainContext,"Guest's aren't authorized to purchase",Toast.LENGTH_SHORT).show();
-                            //Snackbar.make(MAIN_LAYOUT_ACCOUNT,Constants.GUEST_ON_TRY_SELL,Snackbar.LENGTH_INDEFINITE).show();
-                        }
-                    } else {
-                       // Snackbar.make(MAIN_LAYOUT_ACCOUNT, Constants.CANT_CONNECT, Snackbar.LENGTH_INDEFINITE).show();
+                            }
+
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+
+                            }
+                        });
+
+
+                       FirebaseDatabase.getInstance().getReference().child("Category").child(ITEM_SELECTED.Category).addListenerForSingleValueEvent(new ValueEventListener() {
+                           @Override
+                           public void onDataChange(DataSnapshot dataSnapshot) {
+
+                               for(DataSnapshot TODEL:dataSnapshot.getChildren())
+                               {
+                                   Items items=TODEL.getValue(Items.class);
+                                   if(items.IMAGE1.equals(ITEM_SELECTED.IMAGE1))
+                                   {
+                                       KEY=TODEL.getKey();
+                                       FirebaseDatabase.getInstance().getReference().child("Category").child(ITEM_SELECTED.Category).child(KEY).setValue(null);
+                                        Toast.makeText(Account.MainContext,"Item removed",Toast.LENGTH_LONG).show();
+                                   }
+                               }
+                           }
+
+                           @Override
+                           public void onCancelled(DatabaseError databaseError) {
+
+                           }
+                       });
 
                     }
+                });
             }
-            });
+            else
+            {
+                Buy.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        ITEM_SELECTED=ListData.get(getPosition());
+                        // Redirect to Buy Page
+
+                        if(!(Account.LOGGED_IN_USER_DETAIL.Email.equals(Constants.NOT_LOGGEDIN))) {
+                            if (!Account.LOGGED_IN_USER_DETAIL.Email.equals(Constants.GUEST_EMAIL)) {
+                                //   fragmentManager.beginTransaction().replace(R.id.content_frame, new Sell()).commit();
+
+                                Intent On_Buy=new Intent(Main, com.kiit.klx.Activities.On_Buy.class);
+                                Main.startActivity(On_Buy);
+
+
+                            }
+                            else
+                            {
+                                Toast.makeText(Account.MainContext,"Guest's aren't authorized to purchase",Toast.LENGTH_SHORT).show();
+                                //Snackbar.make(MAIN_LAYOUT_ACCOUNT,Constants.GUEST_ON_TRY_SELL,Snackbar.LENGTH_INDEFINITE).show();
+                            }
+                        } else {
+                            // Snackbar.make(MAIN_LAYOUT_ACCOUNT, Constants.CANT_CONNECT, Snackbar.LENGTH_INDEFINITE).show();
+
+                        }
+                    }
+                });
+
+            }
+
 
         }
 

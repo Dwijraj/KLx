@@ -4,7 +4,9 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,7 +31,7 @@ public class MyUploads extends Fragment {
     private DatabaseReference productlist;
     private ArrayList<Items> PRODUCTS=new ArrayList<>();
     private RecyclerViewAdapter recyclerViewAdapter;
-    private FirebaseAuth mauth;
+    public static FirebaseAuth mauth;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -38,6 +40,7 @@ public class MyUploads extends Fragment {
         mauth=FirebaseAuth.getInstance();
         view= inflater.inflate(R.layout.fragment_my_uploads, container, false);
         recyclerView=(RecyclerView) view.findViewById(R.id.CATEGORYSEARCHED_ID);
+        recyclerView.setLayoutManager(new LinearLayoutManager(Account.MainContext));
         productlist= FirebaseDatabase.getInstance().getReference().child("Uploads").child(mauth.getCurrentUser().getUid());
         MyBag.VISIBILITY_FLAG="2";
 
@@ -50,6 +53,8 @@ public class MyUploads extends Fragment {
                     Items Product=DF.getValue(Items.class);
                     PRODUCTS.add(Product);
 
+
+                
                 }
                 recyclerViewAdapter=new RecyclerViewAdapter(PRODUCTS, Account.MainContext,mauth);
                 recyclerView.setAdapter(recyclerViewAdapter);
